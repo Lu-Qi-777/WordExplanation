@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>词语艺解 - {{ interpretation.keyword }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: {{ colors[0] }};
+            --secondary-color: {{ colors[1] }};
+            --accent-color: {{ colors[2] }};
+            --background-color: {{ colors[3] }};
+            --text-color: #292F36;
+            --light-text-color: #6B778C;
+            --divider-color: {{ colors[0] }};
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--background-color);
+            font-family: 'Noto Sans SC', sans-serif;
+            color: var(--text-color);
+        }
+        .card {
+            width: 325px;
+            height: 500px;
+            background-color: #F7FFF7;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 2rem;
+        }
+        .header {
+            background-color: var(--primary-color);
+            color: #F7FFF7;
+            padding: 20px;
+            text-align: left;
+            position: relative;
+            z-index: 1;
+        }
+        h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            margin: 0;
+            font-weight: 700;
+        }
+        .content {
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .word {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .word-main {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .word-main::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+        .word-sub {
+            font-size: 14px;
+            color: var(--light-text-color);
+            margin: 5px 0;
+        }
+        .divider {
+            width: 100%;
+            height: 1px;
+            background-color: var(--divider-color);
+            margin: 20px 0;
+        }
+        .explanation {
+            font-size: 18px;
+            line-height: 1.6;
+            text-align: left;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .quote {
+            position: relative;
+            padding-left: 20px;
+            border-left: 3px solid var(--accent-color);
+        }
+        .background-text {
+            position: absolute;
+            font-size: 150px;
+            color: rgba(255, 107, 107, 0.1);
+            z-index: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+        }
+        .back-button {
+            margin-top: 2rem;
+        }
+        .back-button a {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .back-button a:hover {
+            background: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <h1>词语艺解</h1>
+        </div>
+        <div class="content">
+            <div class="word">
+                <div class="word-main">{{ interpretation.keyword }}</div>
+                <div class="word-sub">{{ interpretation.pinyin }}</div>
+                <div class="word-sub">{{ interpretation.english }}</div>
+                <div class="word-sub">{{ interpretation.japanese }}</div>
+            </div>
+            <div class="divider"></div>
+            <div class="explanation">
+                <div class="quote">
+                    {% for line in interpretation.explanation.split('\n') %}
+                        {{ line }}<br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="background-text">{{ interpretation.keyword }}</div>
+    </div>
+    <div class="back-button">
+        <a href="/">返回首页</a>
+    </div>
+</body>
+</html> 

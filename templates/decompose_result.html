@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>汉字拆解 - {{ original_char }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: {{ colors[0] }};
+            --secondary-color: {{ colors[1] }};
+            --accent-color: {{ colors[2] }};
+            --background-color: {{ colors[3] }};
+            --text-color: #292F36;
+            --light-text-color: #6B778C;
+            --divider-color: {{ colors[0] }};
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--background-color);
+            font-family: 'Noto Sans SC', sans-serif;
+            color: var(--text-color);
+        }
+        .card {
+            width: 325px;
+            height: 600px;
+            background-color: #F7FFF7;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 2rem;
+        }
+        .header {
+            background-color: var(--primary-color);
+            color: #F7FFF7;
+            padding: 20px;
+            text-align: left;
+            position: relative;
+            z-index: 1;
+        }
+        h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            margin: 0;
+            font-weight: 700;
+        }
+        .content {
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .word {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .word-main {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 72px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .section-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: 15px;
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 15px;
+        }
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 5px;
+            height: 18px;
+            background-color: var(--accent-color);
+        }
+        .divider {
+            width: 100%;
+            height: 1px;
+            background-color: var(--divider-color);
+            margin: 15px 0;
+            opacity: 0.5;
+        }
+        .decompose-content {
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: left;
+            padding-left: 15px;
+            white-space: pre-line;
+        }
+        .explanation-content {
+            font-size: 16px;
+            line-height: 1.8;
+            text-align: left;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            border-left: 3px solid var(--accent-color);
+            white-space: pre-line;
+        }
+        .background-text {
+            position: absolute;
+            font-size: 200px;
+            color: rgba(0, 0, 0, 0.03);
+            z-index: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+        }
+        .back-button {
+            margin-top: 2rem;
+        }
+        .back-button a {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .back-button a:hover {
+            background: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <h1>汉字拆解</h1>
+        </div>
+        <div class="content">
+            <div class="word">
+                <div class="word-main">{{ original_char }}</div>
+            </div>
+            
+            <div class="section-title">拆解</div>
+            <div class="decompose-content">{{ decomposition }}</div>
+            
+            <div class="divider"></div>
+            
+            <div class="section-title">解读</div>
+            <div class="explanation-content">{{ interpretation }}</div>
+        </div>
+        <div class="background-text">{{ original_char }}</div>
+    </div>
+    <div class="back-button">
+        <a href="/">返回首页</a>
+    </div>
+</body>
+</html> 
